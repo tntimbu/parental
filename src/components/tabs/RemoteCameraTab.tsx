@@ -11,6 +11,8 @@ import {
   CheckCircle2,
   Maximize2,
   VolumeX,
+  MapPin,
+  Navigation,
 } from 'lucide-react';
 import { useParentGuard } from '../../context/ParentGuardContext';
 import { sounds } from '../../utils/audio';
@@ -29,6 +31,7 @@ export const RemoteCameraTab: React.FC = () => {
     isFlashlightOn,
     toggleFlashlight,
     ambientSoundDb,
+    setActiveTab,
   } = useParentGuard();
 
   const [simulatedScene, setSimulatedScene] = useState<'classroom' | 'library' | 'desk' | 'yard'>('classroom');
@@ -112,6 +115,31 @@ export const RemoteCameraTab: React.FC = () => {
           }`}
         >
           {isRealCameraActive ? 'Matikan Kamera Asli' : 'Uji Kamera Asli'}
+        </button>
+      </section>
+
+      {/* Child Location & Geotag Context Card */}
+      <section className="bg-slate-900/90 border border-indigo-500/30 rounded-2xl p-3 flex items-center justify-between shadow-sm">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center shrink-0">
+            <MapPin className="w-4 h-4" />
+          </div>
+          <div className="truncate">
+            <span className="text-[10px] text-slate-400 block font-medium">
+              Lokasi Fisik Anak Saat Ini:
+            </span>
+            <p className="text-xs font-bold text-slate-200 truncate max-w-[210px]">
+              {currentLocation.address}
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={() => setActiveTab('location')}
+          className="px-2.5 py-1.5 bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 rounded-xl text-[10px] font-semibold border border-indigo-500/40 flex items-center gap-1 shrink-0 transition-colors cursor-pointer"
+        >
+          <Navigation className="w-3 h-3" />
+          <span>Lihat Peta</span>
         </button>
       </section>
 
@@ -219,6 +247,16 @@ export const RemoteCameraTab: React.FC = () => {
             {isFlashlightOn && (
               <div className="absolute inset-0 bg-amber-200/20 mix-blend-overlay pointer-events-none" />
             )}
+
+            {/* Persistent GPS Location Watermark on Viewfinder */}
+            <div className="absolute bottom-12 left-2 right-2 bg-black/80 backdrop-blur-md px-2.5 py-1.5 rounded-xl border border-white/10 text-[9px] font-mono text-slate-300 flex items-center justify-between z-10">
+              <span className="text-emerald-400 font-bold truncate">
+                📍 {currentLocation.address}
+              </span>
+              <span className="text-slate-400 shrink-0 ml-2">
+                GPS: {currentLocation.latitude.toFixed(4)}, {currentLocation.longitude.toFixed(4)}
+              </span>
+            </div>
           </div>
         )}
 
