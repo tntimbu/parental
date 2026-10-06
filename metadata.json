@@ -1,0 +1,11 @@
+{
+  "name": "ParentGuard - Pantau Aktivitas Anak",
+  "description": "Aplikasi web responsif Android untuk orang tua memantau aktivitas anak secara menyeluruh: screen mirroring real-time, pelacakan GPS & geofencing, monitor aplikasi, dan kamera jarak jauh.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "display-capture",
+    "geolocation"
+  ],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
