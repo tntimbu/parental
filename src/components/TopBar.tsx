@@ -14,6 +14,7 @@ import { useParentGuard } from '../context/ParentGuardContext';
 import { AlertsModal } from './modals/AlertsModal';
 import { GuideModal } from './modals/GuideModal';
 import { DevicePairingModal } from './modals/DevicePairingModal';
+import { RoleSelectorModal } from './modals/RoleSelectorModal';
 
 export const TopBar: React.FC = () => {
   const {
@@ -29,6 +30,7 @@ export const TopBar: React.FC = () => {
   const [showAlertModal, setShowAlertModal] = useState<boolean>(false);
   const [showGuideModal, setShowGuideModal] = useState<boolean>(false);
   const [showPairingModal, setShowPairingModal] = useState<boolean>(false);
+  const [showRoleModal, setShowRoleModal] = useState<boolean>(false);
   const [showChildPicker, setShowChildPicker] = useState<boolean>(false);
 
   return (
@@ -48,16 +50,19 @@ export const TopBar: React.FC = () => {
                 <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-slate-900 ring-1 ring-emerald-400/40" title="Online Aktif" />
               </div>
               <div>
+                <span className="text-[9px] font-bold text-indigo-400 uppercase tracking-wider block">
+                  👨‍👩‍👧 Akun Orang Tua
+                </span>
                 <div className="flex items-center gap-1.5">
                   <h1 className="text-sm font-bold text-slate-100 group-hover:text-indigo-300 transition-colors">
                     {profile.name}
                   </h1>
                   <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-200 transition-transform" />
                 </div>
-                <div className="flex items-center gap-1 text-[11px] text-slate-400">
+                <div className="flex items-center gap-1 text-[10px] text-slate-400">
                   <span>{profile.grade}</span>
                   <span>·</span>
-                  <span className="text-emerald-400 font-medium">Terhubung</span>
+                  <span className="text-emerald-400 font-medium">Terhubung Online</span>
                 </div>
               </div>
             </button>
@@ -99,20 +104,14 @@ export const TopBar: React.FC = () => {
 
           {/* Quick Header Actions */}
           <div className="flex items-center gap-1.5">
-            {/* Mode Switcher Button (Parent vs Child) */}
+            {/* Prominent Role Selector Button */}
             <button
-              onClick={() => setAppMode(appMode === 'parent' ? 'child' : 'parent')}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium border transition-all cursor-pointer ${
-                appMode === 'child'
-                  ? 'bg-amber-500/20 border-amber-500/40 text-amber-300 shadow-sm'
-                  : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700'
-              }`}
-              title="Ganti Mode Tampilan (Orang Tua vs Anak)"
+              onClick={() => setShowRoleModal(true)}
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer bg-indigo-600/20 border-indigo-500/40 text-indigo-300 hover:bg-indigo-600/30 shadow-sm"
+              title="Pilih Peran: Mode Orang Tua atau Mode Anak"
             >
-              <Smartphone className="w-3.5 h-3.5 text-indigo-400" />
-              <span className="hidden min-[380px]:inline">
-                {appMode === 'parent' ? 'Mode Anak' : 'Mode Ortu'}
-              </span>
+              <span>👨‍👩‍👧 Ortu</span>
+              <ChevronDown className="w-3 h-3 text-indigo-400" />
             </button>
 
             {/* Guide & Tutorial Button */}
@@ -189,6 +188,9 @@ export const TopBar: React.FC = () => {
 
       {/* Device Pairing & Permissions Onboarding Modal */}
       {showPairingModal && <DevicePairingModal onClose={() => setShowPairingModal(false)} />}
+
+      {/* Role & Account Selector Modal */}
+      {showRoleModal && <RoleSelectorModal onClose={() => setShowRoleModal(false)} />}
     </>
   );
 };

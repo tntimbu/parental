@@ -72,6 +72,9 @@ export const ChildModeView: React.FC = () => {
           <div className="flex items-center gap-2">
             <span className="text-2xl">👦</span>
             <div>
+              <span className="text-[9px] font-bold text-amber-400 uppercase tracking-wider block">
+                ParentGuard Kids · Mode Ponsel Anak
+              </span>
               <h2 className="text-xs font-bold text-slate-100">Hai, {profile.name}!</h2>
               <div className="flex items-center gap-1 text-[10px] text-emerald-400 font-medium">
                 <ShieldCheck className="w-3 h-3" />
@@ -97,6 +100,16 @@ export const ChildModeView: React.FC = () => {
               <span>Ke Ortu</span>
             </button>
           </div>
+        </div>
+
+        {/* Notice for Parent Testing Child Mode */}
+        <div className="p-3 bg-amber-500/10 border border-amber-500/30 rounded-2xl text-[11px] text-amber-200 flex items-start gap-2 shadow-sm">
+          <Sparkles className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+          <p className="leading-relaxed">
+            <strong>Mode Perangkat Anak:</strong> Tampilan ini adalah antarmuka ramah yang akan dilihat oleh anak
+            di ponselnya. Tekan <strong>"Ke Ortu"</strong> di pojok kanan atas (PIN: <strong className="text-white">1234</strong>)
+            untuk kembali ke Dasbor Orang Tua.
+          </p>
         </div>
 
         {/* Priority Message from Parent Pop-up Banner */}

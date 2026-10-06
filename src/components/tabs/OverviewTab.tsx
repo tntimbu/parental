@@ -52,6 +52,26 @@ export const OverviewTab: React.FC = () => {
 
   return (
     <div className="p-4 space-y-4">
+      {/* Account Role Clarification Banner (Play Store Style) */}
+      <div className="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-2.5 px-3 flex items-center justify-between text-xs">
+        <div className="flex items-center gap-2">
+          <span className="text-base">👨‍👩‍👧</span>
+          <div>
+            <span className="font-bold text-slate-200">Mode Orang Tua (Pengawas)</span>
+            <p className="text-[10px] text-slate-400">
+              Memantau: <span className="text-indigo-300 font-semibold">{profile.name}</span> ({profile.deviceName})
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={() => setActiveTab('screen')}
+          className="text-[10px] font-semibold text-indigo-400 hover:text-indigo-300 bg-indigo-500/10 px-2 py-1 rounded-lg border border-indigo-500/20 cursor-pointer"
+        >
+          Lihat Layar Live →
+        </button>
+      </div>
+
       {/* Safety Status Hero Card */}
       <section className="bg-gradient-to-br from-indigo-950/70 via-slate-800 to-slate-900 border border-indigo-500/30 rounded-3xl p-4 shadow-xl relative overflow-hidden">
         <div className="absolute -top-12 -right-12 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none" />
